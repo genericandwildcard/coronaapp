@@ -1,0 +1,32 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    repositories {
+        google()
+        jcenter()
+        maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
+        maven { url 'https://kotlin.bintray.com/kotlinx' }
+    }
+    dependencies {
+        classpath(BuildPlugins.androidGradlePlugin)
+        classpath(BuildPlugins.kotlinGradlePlugin)
+        classpath(BuildPlugins.objectBoxGradlePlugin)
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
+        maven { url 'https://kotlin.bintray.com/kotlinx' }
+        maven { url 'https://dl.bintray.com/lisawray/maven' }
+        maven { url "https://dl.bintray.com/arrow-kt/arrow-kt/" }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

@@ -1,0 +1,90 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:5863295546579123362",
+      "lastPropertyId": "11:2100413483541034845",
+      "name": "ObjectBoxCoronaCountryStats",
+      "properties": [
+        {
+          "id": "1:7513934650306078593",
+          "name": "id",
+          "type": 6,
+          "flags": 129
+        },
+        {
+          "id": "2:2827868608597861102",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "3:7732995983091962796",
+          "name": "countryCode",
+          "indexId": "1:7804999761082627687",
+          "type": 9,
+          "flags": 2048
+        },
+        {
+          "id": "4:8724333939986261712",
+          "name": "date",
+          "type": 9
+        },
+        {
+          "id": "5:7993980471500953029",
+          "name": "newConfirmed",
+          "type": 5,
+          "flags": 2
+        },
+        {
+          "id": "6:6801322817515509452",
+          "name": "newDeaths",
+          "type": 5,
+          "flags": 2
+        },
+        {
+          "id": "7:3906102234620707896",
+          "name": "newRecovered",
+          "type": 5,
+          "flags": 2
+        },
+        {
+          "id": "8:7424667422226657282",
+          "name": "slug",
+          "type": 9
+        },
+        {
+          "id": "9:2855283290682482479",
+          "name": "totalConfirmed",
+          "type": 5,
+          "flags": 2
+        },
+        {
+          "id": "10:935336725605106058",
+          "name": "totalDeaths",
+          "type": 5,
+          "flags": 2
+        },
+        {
+          "id": "11:2100413483541034845",
+          "name": "totalRecovered",
+          "type": 5,
+          "flags": 2
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "1:5863295546579123362",
+  "lastIndexId": "1:7804999761082627687",
+  "lastRelationId": "0:0",
+  "lastSequenceId": "0:0",
+  "modelVersion": 5,
+  "modelVersionParserMinimum": 5,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [],
+  "retiredRelationUids": [],
+  "version": 1
+}
