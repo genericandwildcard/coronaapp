@@ -6,7 +6,7 @@ import com.genericandwildcard.coronafinder.app.core.injection.ViewModelKey
 import com.genericandwildcard.coronafinder.app.coronadata.usecase.ObserveCoronaCountryStatsUseCase
 import com.genericandwildcard.coronafinder.app.countriesapi.usecase.GetFlagUrlUseCase
 import com.genericandwildcard.coronafinder.app.feature.countrylist.CountryListFragment
-import com.genericandwildcard.coronafinder.app.feature.countrylist.injection.MainFragmentModule.ProvideViewModel
+import com.genericandwildcard.coronafinder.app.feature.countrydetails.injection.CountryDetailsFragmentModule.ProvideViewModel
 import com.genericandwildcard.coronafinder.app.feature.countrylist.viewmodel.CountryListViewModel
 import com.genericandwildcard.coronafinder.app.feature.countrylist.viewmodel.CountryListViewModelImpl
 import dagger.Module
@@ -15,7 +15,7 @@ import dagger.android.ContributesAndroidInjector
 import dagger.multibindings.IntoMap
 
 @Module(includes = [ProvideViewModel::class])
-abstract class MainFragmentModule {
+abstract class CountryListFragmentModule {
 
     /* Install module into subcomponent to have access to bound fragment instance */
     @ContributesAndroidInjector(modules = [InjectViewModel::class])

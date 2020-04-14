@@ -1,19 +1,19 @@
-package com.genericandwildcard.coronafinder.app.feature.countrylist
+package com.genericandwildcard.coronafinder.app.feature.countrydetails
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.genericandwildcard.coronafinder.app.R
 import dagger.android.AndroidInjection
 
-class CountryListActivity : AppCompatActivity() {
+class CountryDetailsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.main_activity)
+        setContentView(R.layout.country_details_activity)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.container, CountryListFragment.newInstance())
+                .replace(R.id.container, CountryDetailsFragment.newInstance())
                 .commitNow()
         }
     }

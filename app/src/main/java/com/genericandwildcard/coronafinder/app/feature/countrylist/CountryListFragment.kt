@@ -88,7 +88,7 @@ class CountryListFragment : Fragment() {
 
     class CountryLayoutItem(
         private val viewEntity: CountryListViewEntity,
-        private val onItemClick: (index: Int, entity: CountryListViewEntity) -> Unit
+        private val onItemClick: (index: Int, entity: CountryListViewEntity) -> Unit,
     ) : BindableItem<RowCountryBinding>(viewEntity.name.hashCode().toLong()) {
 
         override fun initializeViewBinding(view: View): RowCountryBinding {
@@ -104,6 +104,10 @@ class CountryListFragment : Fragment() {
             viewBinding.countryTotalRecovered.text = viewEntity.totalRecovered
             viewBinding.countryFlag.load(viewEntity.flagUrl)
 
+            viewBinding.countryItem.setOnClickListener {
+                onItemClick(position, viewEntity)
+            }
+
             viewBinding.btnFavorite.setOnClickListener {
                 val imageView = it as AppCompatImageView
                 val isChecked = imageView.tag as? Boolean ?: false
@@ -113,9 +117,6 @@ class CountryListFragment : Fragment() {
                     imageView.setImageResource(R.drawable.ic_baseline_star_24)
                 }
                 imageView.tag = !isChecked
-            }
-            viewBinding.countryTotalConfirmed.setOnClickListener {
-                onItemClick.invoke(position, viewEntity)
             }
         }
     }
@@ -158,7 +159,7 @@ class CountryListFragment : Fragment() {
             countriesSection.update(state.countries.map {
                 CountryLayoutItem(
                     it,
-                    viewModel::onItemTotalsClick
+                    viewModel::onItemClick
                 )
             })
         }

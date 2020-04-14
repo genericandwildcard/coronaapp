@@ -2,7 +2,8 @@ package com.genericandwildcard.coronafinder.app.application.injection
 
 import com.genericandwildcard.coronafinder.app.application.CoronaApp
 import com.genericandwildcard.coronafinder.app.database.ObjectBoxModule
-import com.genericandwildcard.coronafinder.app.feature.countrylist.injection.MainFeatureModule
+import com.genericandwildcard.coronafinder.app.feature.countrydetails.injection.CountryDetailsFeatureModule
+import com.genericandwildcard.coronafinder.app.feature.countrylist.injection.CountryListFeatureModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
@@ -16,8 +17,9 @@ import javax.inject.Singleton
         AndroidInjectionModule::class,
         AppModule::class,
         ObjectBoxModule::class,
-        ViewModelFactoryModule::class,
-        MainFeatureModule::class
+        CountryDetailsFeatureModule::class,
+        CountryListFeatureModule::class,
+        ViewModelFactoryModule::class
     ]
 )
 interface AppComponent : AndroidInjector<CoronaApp> {
