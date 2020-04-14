@@ -1,7 +1,5 @@
 package com.genericandwildcard.coronafinder.app.coronadata.storage.injection
 
-import com.genericandwildcard.coronafinder.app.core.definitions.ObservableStorage
-import com.genericandwildcard.coronafinder.app.coronadata.entity.CoronaCountryStatsList
 import com.genericandwildcard.coronafinder.app.coronadata.storage.ObjectBoxCoronaCountryStatsStorage
 import com.genericandwildcard.coronafinder.app.coronadata.storage.entity.ObjectBoxCoronaCountryStats
 import dagger.Module
@@ -18,6 +16,6 @@ object CoronaDataStorageModule {
         boxStore.boxFor()
 
     @Provides
-    fun provideObjectBoxCoronaCountryStatsStorage(boxStore: BoxStore): ObservableStorage<CoronaCountryStatsList> =
+    fun provideObjectBoxCoronaCountryStatsStorage(boxStore: BoxStore): ObjectBoxCoronaCountryStatsStorage =
         ObjectBoxCoronaCountryStatsStorage(boxStore = boxStore)
 }

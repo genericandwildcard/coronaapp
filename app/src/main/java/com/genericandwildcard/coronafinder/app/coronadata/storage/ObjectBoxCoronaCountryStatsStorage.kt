@@ -5,6 +5,7 @@ import com.genericandwildcard.coronafinder.app.core.definitions.ObservableStorag
 import com.genericandwildcard.coronafinder.app.coronadata.entity.CoronaCountryStats
 import com.genericandwildcard.coronafinder.app.coronadata.entity.CoronaCountryStatsList
 import com.genericandwildcard.coronafinder.app.coronadata.storage.entity.ObjectBoxCoronaCountryStats
+import com.genericandwildcard.coronafinder.app.coronadata.storage.entity.ObjectBoxCoronaCountryStats_
 import io.objectbox.Box
 import io.objectbox.BoxStore
 import io.objectbox.kotlin.boxFor
@@ -17,14 +18,14 @@ import org.threeten.bp.OffsetDateTime
 
 class ObjectBoxCoronaCountryStatsStorage(
     private val boxStore: BoxStore
-) : ObservableStorage<CoronaCountryStatsList> {
+) {
 
     private val box: Box<ObjectBoxCoronaCountryStats> = boxStore.boxFor()
     private val query: Query<ObjectBoxCoronaCountryStats> = box.query().build()
 
-    override val isEmpty: Boolean get() = query.count() == 0L
+    val isEmpty: Boolean get() = query.count() == 0L
 
-    override fun observe(): Flow<CoronaCountryStatsList> = callbackFlow {
+    fun observe(): Flow<CoronaCountryStatsList> = callbackFlow {
         val subscription = query.subscribe()
             .observer { data -> sendBlocking(data.map { it.toDomainModel() }) }
         /*
@@ -35,12 +36,12 @@ class ObjectBoxCoronaCountryStatsStorage(
         awaitClose { subscription.cancel() }
     }
 
-    override fun replaceAll(value: CoronaCountryStatsList) {
+    fun replaceAll(value: CoronaCountryStatsList) {
         box.removeAll()
         box.put(value.map { it.toDatabaseModel() })
     }
 
-    override fun put(value: CoronaCountryStatsList) {
+    fun put(value: CoronaCountryStatsList) {
         box.put(value.map { it.toDatabaseModel() })
     }
 
@@ -73,5 +74,23 @@ class ObjectBoxCoronaCountryStatsStorage(
             totalDeaths = totalDeaths ?: 0,
             totalRecovered = totalRecovered ?: 0
         )
+    }
+
+    fun observe(countryCode: String): Flow<CoronaCountryStats> = callbackFlow {
+        val query: Query<ObjectBoxCoronaCountryStats> =
+            box.query().equal(ObjectBoxCoronaCountryStats_.countryCode, countryCode).build()
+
+        val subscription = query.subscribe()
+            .observer { data: List<ObjectBoxCoronaCountryStats> ->
+                sendBlocking(
+                    data.first().toDomainModel()
+                )
+            }
+        /*
+         * Suspends until either 'onCompleted'/'onApiError' from the callback is invoked
+         * or flow collector is cancelled (e.g. by 'take(1)' or because a collector's coroutine was cancelled).
+         * In both cases, callback will be properly unregistered.
+         */
+        awaitClose { subscription.cancel() }
     }
 }
