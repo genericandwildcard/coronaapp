@@ -3,6 +3,8 @@ package com.genericandwildcard.coronafinder.app.feature.countrydetails.injection
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.genericandwildcard.coronafinder.app.core.injection.ViewModelKey
+import com.genericandwildcard.coronafinder.app.coronadata.repo.CoronaRepo
+import com.genericandwildcard.coronafinder.app.countriesapi.usecase.GetFlagUrlUseCase
 import com.genericandwildcard.coronafinder.app.feature.countrydetails.CountryDetailsFragment
 import com.genericandwildcard.coronafinder.app.feature.countrydetails.CountryDetailsViewModel
 import com.genericandwildcard.coronafinder.app.feature.countrydetails.injection.CountryDetailsFragmentModule.ProvideViewModel
@@ -35,7 +37,12 @@ abstract class CountryDetailsFragmentModule {
         @IntoMap
         @ViewModelKey(CountryDetailsViewModel::class)
         fun provideFeatureViewModel(
-        ): ViewModel = CountryDetailsViewModel()
+            countryRepo: CoronaRepo,
+            countryFlagUseCase: GetFlagUrlUseCase
+        ): ViewModel = CountryDetailsViewModel(
+            countryRepo = countryRepo,
+            countryFlagUseCase = countryFlagUseCase
+        )
     }
 
 }

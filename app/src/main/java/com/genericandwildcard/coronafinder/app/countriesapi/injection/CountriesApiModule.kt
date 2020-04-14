@@ -1,8 +1,6 @@
 package com.genericandwildcard.coronafinder.app.countriesapi.injection
 
 import com.genericandwildcard.coronafinder.app.countriesapi.api.CountriesApi
-import com.genericandwildcard.coronafinder.app.countriesapi.repo.CountriesRepo
-import com.genericandwildcard.coronafinder.app.countriesapi.repo.CountriesRepoImpl
 import com.genericandwildcard.coronafinder.app.countriesapi.repo.CountryFlagUrlRepo
 import com.genericandwildcard.coronafinder.app.countriesapi.usecase.GetFlagUrlUseCase
 import com.squareup.moshi.Moshi
@@ -35,9 +33,4 @@ object CountriesApiModule {
     @Singleton
     @Provides
     fun provideCountryFlagUrlRepo(): CountryFlagUrlRepo = CountryFlagUrlRepo()
-
-    @Singleton
-    @Provides
-    fun provideCountriesRepo(countriesApi: CountriesApi): CountriesRepo =
-        CountriesRepoImpl(countriesApi)
 }
