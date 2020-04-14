@@ -9,5 +9,5 @@ interface CountryListViewModel {
 
     val viewState: LiveData<CountryListFragment.State>
 
-    fun onItemTotalsClick(index: Int, item: CountryListViewEntity)
+    fun onItemClick(index: Int, item: CountryListViewEntity)
 }

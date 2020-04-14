@@ -10,6 +10,7 @@ import com.genericandwildcard.coronafinder.app.countriesapi.usecase.GetFlagUrlUs
 import com.genericandwildcard.coronafinder.app.feature.countrylist.CountryListFragment.State
 import com.genericandwildcard.coronafinder.app.feature.countrylist.CountryListFragment.State.Loading
 import com.genericandwildcard.coronafinder.app.feature.countrylist.CountryListViewEntity
+import com.genericandwildcard.coronafinder.app.feature.countrylist.Navigator
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.flow.FlowCollector
@@ -33,6 +34,7 @@ class CountryListViewModelImpl(
                         viewState.value =
                             State.Success(value.map {
                                 CountryListViewEntity(
+                                    countryCode = it.countryCode,
                                     name = it.name,
                                     flagUrl = countryFlagUseCase.execute(it.countryCode).fold(
                                         { "" },
@@ -66,17 +68,8 @@ class CountryListViewModelImpl(
         countryStatsUseCase.reload()
     }
 
-    // TODO: Following this is horrible hacking
-    private var isSortedDesc = false
-    override fun onItemTotalsClick(index: Int, item: CountryListViewEntity) {
-        viewState.value = State.Success(when (isSortedDesc) {
-            true -> (viewState.value as State.Success).countries.sortedByDescending {
-                it.totalConfirmedRaw
-            }
-            false -> (viewState.value as State.Success).countries.sortedBy {
-                it.totalConfirmedRaw
-            }
-        }.also { isSortedDesc = !isSortedDesc })
+    override fun onItemClick(index: Int, item: CountryListViewEntity) {
+        Navigator.navigateToCountryDetails(item.countryCode)
     }
 }
 

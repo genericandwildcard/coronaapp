@@ -6,8 +6,8 @@ import dagger.Subcomponent
 import dagger.android.AndroidInjector
 
 @ActivityScope
-@Subcomponent(modules = [MainActivityModule::class])
-interface MainActivitySubComponent : AndroidInjector<CountryListActivity> {
+@Subcomponent(modules = [CountryListActivityModule::class])
+interface CountryListActivitySubComponent : AndroidInjector<CountryListActivity> {
 
     @Subcomponent.Factory
     interface Factory : AndroidInjector.Factory<CountryListActivity>
