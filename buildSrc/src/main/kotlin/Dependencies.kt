@@ -47,8 +47,10 @@ object Libraries {
         const val materialDialogs = "3.3.0"
         const val arrow = "0.10.4"
         const val coil = "0.9.5"
+        const val mpandroidchart = "v3.1.0"
     }
 
+    const val mpAndroidChartLib = "com.github.PhilJay:MPAndroidChart:${Versions.mpandroidchart}"
     const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
     const val appCompat = "androidx.appcompat:appcompat:${Versions.appCompat}"
     const val materialDesign = "com.google.android.material:material:${Versions.materialDesign}"

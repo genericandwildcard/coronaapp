@@ -56,7 +56,7 @@ class CountryListViewModelImpl(
                                     )} (${String.format("%+,d", it.newRecovered)})",
                                     totalRecoveredRaw = it.totalRecovered
                                 )
-                            })
+                            }.sortedByDescending { it.totalConfirmedRaw })
                     }
                 }
             })

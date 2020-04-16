@@ -24,6 +24,7 @@ allprojects {
         maven { url 'https://kotlin.bintray.com/kotlinx' }
         maven { url 'https://dl.bintray.com/lisawray/maven' }
         maven { url "https://dl.bintray.com/arrow-kt/arrow-kt/" }
+        maven { url 'https://jitpack.io' }
     }
 }
 

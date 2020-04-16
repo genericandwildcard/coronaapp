@@ -6,6 +6,7 @@ import arrow.fx.IO
 import arrow.fx.extensions.fx
 import arrow.fx.handleError
 import com.genericandwildcard.coronafinder.app.coronadata.api.CoronaApi
+import com.genericandwildcard.coronafinder.app.coronadata.api.entity.CountryHistoryItem
 import com.genericandwildcard.coronafinder.app.coronadata.api.entity.mapToCountryStats
 import com.genericandwildcard.coronafinder.app.coronadata.entity.CoronaCountryStats
 import com.genericandwildcard.coronafinder.app.coronadata.entity.CoronaCountryStatsList
@@ -35,6 +36,10 @@ class CoronaRepo(
             Log.e("CoronaError", it.localizedMessage)
             it.printStackTrace()
         }.unsafeRunAsync { }
+    }
+
+    suspend fun getCountryHistory(slug: String): List<CountryHistoryItem> {
+        return api.getHistorical(slug)
     }
 
     fun observeCountryStats(): Flow<CoronaCountryStatsList> = countryStatsStorage.observe()
