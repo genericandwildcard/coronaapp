@@ -33,15 +33,21 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@tools:sample/avatars" />
 
-
-    <com.github.mikephil.charting.charts.BarChart
-        android:id="@+id/chart1"
+    <com.genericandwildcard.coronafinder.app.core.view.StateView
+        android:id="@+id/chartState"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/country_flag" />
+        app:layout_constraintTop_toBottomOf="@+id/country_flag">
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/chart1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </com.genericandwildcard.coronafinder.app.core.view.StateView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

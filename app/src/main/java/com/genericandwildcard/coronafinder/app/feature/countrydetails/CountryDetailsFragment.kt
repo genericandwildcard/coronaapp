@@ -59,7 +59,6 @@ class CountryDetailsFragment : Fragment() {
         binding?.run {
             chart1.setNoDataText("Loading...")
             chart1.axisLeft.axisMinimum = 0f
-            chart1.isDoubleTapToZoomEnabled = false
             chart1.isLogEnabled = true
             chart1.description.isEnabled = false
             chart1.axisRight.isEnabled = false
@@ -80,16 +79,26 @@ class CountryDetailsFragment : Fragment() {
 
         viewModel.countryHistory.observe(viewLifecycleOwner) { history ->
             binding?.run {
-                history.barData.setValueFormatter(StackedValueFormatter(true, "", 0))
-                history.barData.setDrawValues(false)
-                history.barData.setValueTextSize(15F)
-                chart1.data = history.barData
-                chart1.zoom(zoomX, zoomY, 0f, 0F)
-                chart1.moveViewToX(transX)
+                if (history.xAxisDates.isEmpty()) {
+                    chartState.showNoData()
+                } else {
+                    chartState.showSuccess()
 
-                chart1.xAxis.valueFormatter = object : ValueFormatter() {
-                    override fun getFormattedValue(value: Float): String {
-                        return history.xAxisDates[value.toInt()]
+                    history.barData.setValueFormatter(StackedValueFormatter(true, "", 0))
+                    history.barData.isHighlightEnabled = true
+                    history.barData.setDrawValues(false)
+                    history.barData.setValueTextSize(15F)
+                    chart1.data = history.barData
+                    chart1.zoom(zoomX, zoomY, 0f, 0F)
+                    chart1.moveViewToX(transX)
+
+                    chart1.xAxis.valueFormatter = object : ValueFormatter() {
+                        override fun getFormattedValue(value: Float): String {
+                            if (history.xAxisDates.isEmpty()) {
+                                return "No data"
+                            }
+                            return history.xAxisDates[value.toInt()]
+                        }
                     }
                 }
             }
