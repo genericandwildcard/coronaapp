@@ -86,7 +86,7 @@ class CountryListFragment : Fragment() {
         Log.i("ViewModelInstance", "ViewModel instance is ${viewModel.hashCode()}")
     }
 
-    class CountryLayoutItem(
+    inner class CountryLayoutItem(
         private val viewEntity: CountryListViewEntity,
         private val onItemClick: (index: Int, entity: CountryListViewEntity) -> Unit,
     ) : BindableItem<RowCountryBinding>(viewEntity.name.hashCode().toLong()) {
@@ -108,15 +108,13 @@ class CountryListFragment : Fragment() {
                 onItemClick(position, viewEntity)
             }
 
+            with(viewBinding) {
+                if (viewEntity.isFavorite) btnFavorite.setImageResource(R.drawable.ic_baseline_star_24)
+                else btnFavorite.setImageResource(R.drawable.ic_baseline_star_border_24)
+            }
+
             viewBinding.btnFavorite.setOnClickListener {
-                val imageView = it as AppCompatImageView
-                val isChecked = imageView.tag as? Boolean ?: false
-                if (isChecked) {
-                    imageView.setImageResource(R.drawable.ic_baseline_star_border_24)
-                } else {
-                    imageView.setImageResource(R.drawable.ic_baseline_star_24)
-                }
-                imageView.tag = !isChecked
+                viewModel.onFavoriteClick(viewEntity, viewEntity.isFavorite)
             }
         }
     }

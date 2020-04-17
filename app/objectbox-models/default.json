@@ -74,10 +74,31 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "2:2882999618582280191",
+      "lastPropertyId": "2:130706476064165762",
+      "name": "CountryFavorite",
+      "properties": [
+        {
+          "id": "1:4174018176753029628",
+          "name": "id",
+          "type": 6,
+          "flags": 129
+        },
+        {
+          "id": "2:130706476064165762",
+          "name": "countryCode",
+          "indexId": "2:4426510984541596614",
+          "type": 9,
+          "flags": 2048
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "1:5863295546579123362",
-  "lastIndexId": "1:7804999761082627687",
+  "lastEntityId": "2:2882999618582280191",
+  "lastIndexId": "2:4426510984541596614",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 5,

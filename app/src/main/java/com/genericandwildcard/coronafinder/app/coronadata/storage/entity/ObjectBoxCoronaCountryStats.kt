@@ -6,7 +6,8 @@ import org.threeten.bp.OffsetDateTime
 
 @Entity
 data class ObjectBoxCoronaCountryStats(
-    @Id(assignable = true) var id: Long = 0,
+    @Id(assignable = true)
+    var id: Long = 0,
     @NameInDb("name")
     var name: String? = null,
     @Index

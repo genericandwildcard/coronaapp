@@ -1,7 +1,7 @@
 package com.genericandwildcard.coronafinder.app.database
 
 import android.content.Context
-import com.genericandwildcard.coronafinder.app.coronadata.storage.entity.MyObjectBox
+import com.genericandwildcard.coronafinder.app.coronadata.storage.MyObjectBox
 import dagger.Module
 import dagger.Provides
 import io.objectbox.BoxStore

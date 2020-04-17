@@ -1,7 +1,6 @@
 package com.genericandwildcard.coronafinder.app.coronadata.storage
 
 import arrow.core.extensions.list.applicative.map
-import com.genericandwildcard.coronafinder.app.core.definitions.ObservableStorage
 import com.genericandwildcard.coronafinder.app.coronadata.entity.CoronaCountryStats
 import com.genericandwildcard.coronafinder.app.coronadata.entity.CoronaCountryStatsList
 import com.genericandwildcard.coronafinder.app.coronadata.storage.entity.ObjectBoxCoronaCountryStats
@@ -21,12 +20,12 @@ class ObjectBoxCoronaCountryStatsStorage(
 ) {
 
     private val box: Box<ObjectBoxCoronaCountryStats> = boxStore.boxFor()
-    private val query: Query<ObjectBoxCoronaCountryStats> = box.query().build()
+    private val queryCountryStats: Query<ObjectBoxCoronaCountryStats> = box.query().build()
 
-    val isEmpty: Boolean get() = query.count() == 0L
+    val isEmpty: Boolean get() = queryCountryStats.count() == 0L
 
     fun observe(): Flow<CoronaCountryStatsList> = callbackFlow {
-        val subscription = query.subscribe()
+        val subscription = queryCountryStats.subscribe()
             .observer { data -> sendBlocking(data.map { it.toDomainModel() }) }
         /*
          * Suspends until either 'onCompleted'/'onApiError' from the callback is invoked
