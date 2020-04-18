@@ -1,6 +1,6 @@
 package com.genericandwildcard.coronafinder.app.countriesapi.injection
 
-import com.genericandwildcard.coronafinder.app.countriesapi.api.CountriesApi
+import com.genericandwildcard.coronafinder.app.countriesapi.api.CountryApi
 import com.genericandwildcard.coronafinder.app.countriesapi.repo.CountryFlagUrlRepo
 import com.genericandwildcard.coronafinder.app.countriesapi.usecase.GetFlagUrlUseCase
 import com.squareup.moshi.Moshi
@@ -15,15 +15,15 @@ object CountriesApiModule {
 
     @Provides
     @Singleton
-    fun provideCountriesApi(): CountriesApi = Retrofit.Builder()
-        .baseUrl(CountriesApi.baseUrl)
+    fun provideCountriesApi(): CountryApi = Retrofit.Builder()
+        .baseUrl(CountryApi.baseUrl)
         .addConverterFactory(
             MoshiConverterFactory.create(
                 Moshi.Builder().build()
             )
         )
         .build()
-        .create(CountriesApi::class.java)
+        .create(CountryApi::class.java)
 
     @Singleton
     @Provides

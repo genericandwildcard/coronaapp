@@ -2,6 +2,7 @@ package com.genericandwildcard.coronafinder.app.feature.countrylist.injection
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.genericandwildcard.coronafinder.app.core.Dialogs
 import com.genericandwildcard.coronafinder.app.core.injection.ViewModelKey
 import com.genericandwildcard.coronafinder.app.coronadata.repo.CoronaRepo
 import com.genericandwildcard.coronafinder.app.coronadata.storage.FavoritesRepo
@@ -41,12 +42,14 @@ abstract class CountryListFragmentModule {
         fun provideFeatureViewModel(
             coronaRepo: CoronaRepo,
             countryFlagUseCase: GetFlagUrlUseCase,
-            favoritesRepo: FavoritesRepo
+            favoritesRepo: FavoritesRepo,
+            dialogs: Dialogs
         ): ViewModel =
             CountryListViewModel(
                 coronaRepo = coronaRepo,
                 countryFlagUseCase = countryFlagUseCase,
-                favoritesRepo = favoritesRepo
+                favoritesRepo = favoritesRepo,
+                dialogs = dialogs
             )
     }
 

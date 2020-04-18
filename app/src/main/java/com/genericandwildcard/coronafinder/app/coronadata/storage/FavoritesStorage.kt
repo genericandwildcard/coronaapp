@@ -11,6 +11,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 
 
+fun String.getId() = this.toLong(36)
+
 class FavoritesRepo(
     private val boxStore: BoxStore
 ) {
@@ -29,8 +31,6 @@ class FavoritesRepo(
          */
         awaitClose { subscription.cancel() }
     }
-
-    fun String.getId() = this.toLong(36)
 
     fun save(countryCode: String) {
         box.put(CountryFavorite(countryCode.getId(), countryCode))

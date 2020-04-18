@@ -42,6 +42,7 @@ android {
 
 dependencies {
     implementation(Libraries.mpAndroidChartLib)
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.0.0")
     implementation(Libraries.kotlinStdLib)
     implementation(Libraries.appCompat)
     implementation(Libraries.materialDesign)

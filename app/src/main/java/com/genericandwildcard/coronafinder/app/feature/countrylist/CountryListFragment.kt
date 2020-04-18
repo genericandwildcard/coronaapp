@@ -3,7 +3,6 @@ package com.genericandwildcard.coronafinder.app.feature.countrylist
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import coil.api.load
@@ -18,6 +17,7 @@ import com.xwray.groupie.Section
 import com.xwray.groupie.viewbinding.BindableItem
 import com.xwray.groupie.viewbinding.GroupieViewHolder
 import dagger.android.support.AndroidSupportInjection
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Inject
 
 class CountryListFragment : Fragment() {
@@ -58,7 +58,6 @@ class CountryListFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == reloadItemId) {
-            countriesSection.clear()
             viewModel.reload()
             return true
         }
@@ -76,14 +75,62 @@ class CountryListFragment : Fragment() {
         return binding!!.root
     }
 
+
+    @ExperimentalCoroutinesApi
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding?.run {
+            countriesRecycler.adapter = countriesAdapter
+            countriesAdapter.add(countriesSection)
+            refreshCountriesLayout.setOnRefreshListener { viewModel.reload() }
+            settingsButton.setOnClickListener {
+                dialogs.showSettingsBottomSheet(viewModel.isPercentage.value) { isChecked ->
+                    viewModel.onShowPercentageToggled(
+                        isChecked
+                    )
+                }
+            }
+        }
+
+        viewModel.viewState.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                is State.Loading -> showLoadingState(state)
+                is State.Success -> showSuccess(state)
+                is State.Failure -> showError(state)
+            }
+        }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        Log.i("ViewModelInstance", "ViewModel instance is ${viewModel.hashCode()}")
+    private fun showLoadingState(state: State.Loading) {
+        binding?.run {
+            refreshCountriesLayout.isRefreshing = true
+        }
+    }
+
+    private fun showError(state: State.Failure) {
+        binding?.run {
+            refreshCountriesLayout.isRefreshing = false
+            countriesRecycler.isVisible = false
+        }
+    }
+
+    private fun showSuccess(state: State.Success) {
+        binding?.run {
+            refreshCountriesLayout.isRefreshing = false
+            countriesRecycler.isVisible = true
+            countriesSection.update(state.countries.map {
+                CountryLayoutItem(
+                    it,
+                    viewModel::onItemClick
+                )
+            })
+        }
     }
 
     inner class CountryLayoutItem(
@@ -119,48 +166,5 @@ class CountryListFragment : Fragment() {
         }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        binding?.run {
-            countriesRecycler.adapter = countriesAdapter
-            countriesAdapter.add(countriesSection)
-        }
-
-        viewModel.viewState.observe(viewLifecycleOwner) { state ->
-            when (state) {
-                is State.Loading -> showLoadingState(state)
-                is State.Success -> showSuccess(state)
-                is State.Failure -> showError(state)
-            }
-        }
-    }
-
-    private fun showLoadingState(state: State.Loading) {
-        binding?.run {
-            loadingSpinner.show()
-            countriesRecycler.isVisible = false
-        }
-    }
-
-    private fun showError(state: State.Failure) {
-        binding?.run {
-            loadingSpinner.hide()
-            countriesRecycler.isVisible = false
-        }
-    }
-
-    private fun showSuccess(state: State.Success) {
-        binding?.run {
-            loadingSpinner.hide()
-            countriesRecycler.isVisible = true
-            countriesSection.update(state.countries.map {
-                CountryLayoutItem(
-                    it,
-                    viewModel::onItemClick
-                )
-            })
-        }
-    }
 }
 

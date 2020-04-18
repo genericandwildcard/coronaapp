@@ -95,9 +95,34 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "3:3080713666983901758",
+      "lastPropertyId": "3:3566037069097319725",
+      "name": "ObjectBoxCountryInfo",
+      "properties": [
+        {
+          "id": "1:917726661668306246",
+          "name": "id",
+          "type": 6,
+          "flags": 129
+        },
+        {
+          "id": "2:7835914058126503513",
+          "name": "population",
+          "type": 5,
+          "flags": 4
+        },
+        {
+          "id": "3:3566037069097319725",
+          "name": "countryCode",
+          "type": 9
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "2:2882999618582280191",
+  "lastEntityId": "3:3080713666983901758",
   "lastIndexId": "2:4426510984541596614",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",

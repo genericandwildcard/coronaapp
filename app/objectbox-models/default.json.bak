@@ -74,10 +74,51 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "2:2882999618582280191",
+      "lastPropertyId": "2:130706476064165762",
+      "name": "CountryFavorite",
+      "properties": [
+        {
+          "id": "1:4174018176753029628",
+          "name": "id",
+          "type": 6,
+          "flags": 129
+        },
+        {
+          "id": "2:130706476064165762",
+          "name": "countryCode",
+          "indexId": "2:4426510984541596614",
+          "type": 9,
+          "flags": 2048
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "3:3080713666983901758",
+      "lastPropertyId": "2:7835914058126503513",
+      "name": "ObjectBoxCountryInfo",
+      "properties": [
+        {
+          "id": "1:917726661668306246",
+          "name": "id",
+          "type": 6,
+          "flags": 129
+        },
+        {
+          "id": "2:7835914058126503513",
+          "name": "population",
+          "type": 5,
+          "flags": 4
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "1:5863295546579123362",
-  "lastIndexId": "1:7804999761082627687",
+  "lastEntityId": "3:3080713666983901758",
+  "lastIndexId": "2:4426510984541596614",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 5,

@@ -11,6 +11,7 @@ import coil.decode.SvgDecoder
 import com.genericandwildcard.coronafinder.app.application.injection.DaggerAppComponent
 import com.genericandwildcard.coronafinder.app.core.definitions.ActivityProvider
 import com.genericandwildcard.coronafinder.app.core.definitions.FragmentManagerProvider
+import com.genericandwildcard.coronafinder.app.coronadata.storage.MyObjectBox
 import com.jakewharton.threetenabp.AndroidThreeTen
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -24,6 +25,12 @@ class CoronaApp : Application(), HasAndroidInjector,
     companion object {
         lateinit var instance: CoronaApp
             private set
+    }
+
+    val boxStore by lazy {
+        MyObjectBox.builder()
+            .androidContext(this)
+            .build()
     }
 
     private val currentActivities: MutableList<AppCompatActivity> = mutableListOf()

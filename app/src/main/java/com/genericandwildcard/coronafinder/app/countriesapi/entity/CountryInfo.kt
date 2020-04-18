@@ -1,7 +1,5 @@
 package com.genericandwildcard.coronafinder.app.countriesapi.entity
 
-
-import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import androidx.annotation.Keep
 
